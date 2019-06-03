@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.mcxiaoke.koi.ext.toast
 import com.mihaidornea.mvp_project.R
-import com.mihaidornea.mvp_project.replaceWithAnimation
 import com.mihaidornea.mvp_project.ui.otp.OtpVerificationFragment
 import com.mihaidornea.mvp_project.ui.otp.OtpVerificationPresenter
+import com.mihaidornea.mvp_project.utils.replaceWithAnimation
 import kotlinx.android.synthetic.main.fragment_verify_phone_number.*
 
-class PhoneVerificationFragment : Fragment(), PhoneVerificationContract.View{
+class PhoneVerificationFragment : Fragment(), PhoneVerificationContract.View {
     private var presenter: PhoneVerificationContract.Presenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -27,6 +28,7 @@ class PhoneVerificationFragment : Fragment(), PhoneVerificationContract.View{
     override fun onStart() {
         super.onStart()
         presenter?.takeView(this)
+        presenter?.getData()
     }
 
     override fun onStop() {
@@ -38,8 +40,12 @@ class PhoneVerificationFragment : Fragment(), PhoneVerificationContract.View{
         this.presenter = presenter
     }
 
+    override fun showMessage(message: String) {
+        toast(message)
+    }
+
     private fun initializeUIComponents() {
-        fr_verify_phone_number_btn_next.setOnClickListener{
+        fr_verify_phone_number_btn_next.setOnClickListener {
             presenter?.loadNextScreen()
         }
         fr_verify_phone_number_iv_back.setOnClickListener {
@@ -48,7 +54,7 @@ class PhoneVerificationFragment : Fragment(), PhoneVerificationContract.View{
     }
 
     override fun navigateNextScreen() {
-        activity?.let{act ->
+        activity?.let { act ->
             val fragment = OtpVerificationFragment()
             fragment.setPresenter(OtpVerificationPresenter())
             act replaceWithAnimation fragment

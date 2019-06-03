@@ -1,8 +1,9 @@
-package com.mihaidornea.mvp_project
+package com.mihaidornea.mvp_project.utils
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
+import com.mihaidornea.mvp_project.R
 import com.mihaidornea.mvp_project.ui.main.MainActivity
 
 infix fun <T : FragmentActivity> T.replaceWithAnimation(fragment: Fragment) {
