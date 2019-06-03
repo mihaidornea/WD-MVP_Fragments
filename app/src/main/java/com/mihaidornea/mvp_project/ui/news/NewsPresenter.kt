@@ -8,7 +8,7 @@ import org.koin.core.inject
 
 class NewsPresenter : NewsContract.Presenter, KoinComponent, RemoteDataCallback<NewsApiResponse> {
 
-    val repo by inject<Repository>()
+    private val repo by inject<Repository>()
     private var view: NewsContract.View? = null
 
     override fun takeView(view: NewsContract.View) {
