@@ -1,14 +1,15 @@
 package com.mihaidornea.mvp_project.ui.otp
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.mihaidornea.mvp_project.R
+import com.mihaidornea.mvp_project.ui.news.NewsFragment
+import com.mihaidornea.mvp_project.ui.news.NewsPresenter
+import com.mihaidornea.mvp_project.utils.replaceWithAnimation
 import kotlinx.android.synthetic.main.fragment_otp_verification.*
-import kotlinx.android.synthetic.main.fragment_verify_phone_number.*
 
 class OtpVerificationFragment : Fragment(), OtpVerificationContract.View {
     private var presenter : OtpVerificationContract.Presenter? = null
@@ -41,9 +42,17 @@ class OtpVerificationFragment : Fragment(), OtpVerificationContract.View {
         fr_otp_verification_iv_back.setOnClickListener{
             presenter?.loadPreviousScreen()
         }
+        fr_otp_verification_pt_otp_code.setOnPinEnteredListener {
+            navigateNextScreen()
+        }
     }
 
     override fun navigateNextScreen() {
+        activity?.let { act ->
+            val fragment = NewsFragment()
+            fragment.setPresenter(NewsPresenter())
+            act replaceWithAnimation fragment
+        }
     }
 
     override fun navigatePreviousScreen() {

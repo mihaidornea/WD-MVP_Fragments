@@ -1,7 +1,7 @@
 package com.mihaidornea.mvp_project.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.mihaidornea.mvp_project.R
 
 class MainActivity : AppCompatActivity() {
